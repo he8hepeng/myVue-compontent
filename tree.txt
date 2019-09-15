@@ -1,0 +1,95 @@
+卷 Windows 的文件夹 PATH 列表
+卷序列号为 1685-153D
+C:.
+│  .editorconfig
+│  .gitignore
+│  babel.config.js
+│  node_modules.zip
+│  package-lock.json
+│  package.json
+│  README.md
+│  tree.txt
+│  vue.config.js
+│  
+├─dist
+│  │  favicon.ico
+│  │  index.html
+│  │  
+│  ├─css
+│  │      app.9640e964.css
+│  │      
+│  ├─img
+│  │      logo.82b9c7a5.png
+│  │      
+│  └─js  
+│          
+├─node_modules
+│              
+├─public
+│  │  favicon.ico
+│  │  index.html
+│  │  
+│  └─lib
+└─src
+    │  App.vue
+    │  example.vue
+    │  main.js
+    │  
+    ├─api
+    ├─assets
+    │  ├─css
+    │  │      common.less
+    │  │      element.less
+    │  │      reset.less
+    │  │      variable.less
+    │  │      
+    │  └─js
+    │      │  README.md
+    │      │  
+    │      └─mixin
+    │              globalMinxin.js
+    │              
+    ├─components
+    │  │  README.md
+    │  │  
+    │  ├─BaseTableAudit
+    │  │      tree.vue
+    │  │      
+    │  └─Configuration_information
+    │          definition.vue
+    │          list.less
+    │          ruleList.vue
+    │          statistics.vue
+    │          
+    ├─layouts
+    │      header.vue
+    │      home.vue
+    │      nav.vue
+    │      README.md
+    │      
+    ├─mock
+    │      mock.js
+    │      mock.json
+    │      
+    ├─public
+    │      axios.js
+    │      cookie.js
+    │      global.js
+    │      
+    ├─router
+    │      index.js
+    │      
+    ├─store
+    │  │  index.js
+    │  │  
+    │  └─modules
+    │          Configuration_information.js
+    │          public.js
+    │          
+    └─views
+        ├─BaseTableAudit
+        │      visualization.vue
+        │      
+        └─Configuration_information
+                configuration.vue
+                
