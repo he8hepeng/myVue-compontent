@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your Hepeng
  * @Date: 2019-09-11 15:24:24
- * @LastEditTime: 2019-09-16 21:54:41
+ * @LastEditTime: 2019-09-16 21:55:55
  * @LastEditors: Please set LastEditors
  -->
 # vue3
@@ -37,12 +37,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ### by 何鹏
-### 首先 欢迎使用大数据 vue摸板1.0 有很多都是个人使用的经验和习惯 也参考了网上和很多身边人的经验和习惯
-### 如发现有不足 bug 以及反人类的情况 请及时与我提建议 我会及时修改
-
-
- 卷 Windows 的文件夹 PATH 列表
- 卷序列号为 1685-153D
+```
+ 首先 欢迎使用大数据 vue摸板1.0 有很多都是个人使用的经验和习惯 也参考了网上和很多身边人的经验和习惯
+ 如发现有不足 bug 以及反人类的情况 请及时与我提建议 我会及时修改
+```
 ### 文件目录如下~
 ```
 C:.
@@ -136,7 +134,8 @@ C:.
                 configuration.vue
 ```
 
-整理了一份 vscode的插件 有兴趣的小伙伴可以安装一下
+### 整理了一份 vscode的插件 有兴趣的小伙伴可以安装一下
+```
 Auto Close Tag
 Beautify
 Bracket Pair Colorizer 2
@@ -154,3 +153,4 @@ Vetur
 vscode-icons
 
 可能会有一些美化插件 有个蛋用啊！~ 总的来说 对代码一如了然 减少阅读成本 节约的时间 上个神儿..睡一会.. 也可观的...对吧
+```
