@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your Hepeng
  * @Date: 2019-09-11 15:24:24
- * @LastEditTime: 2019-09-16 20:24:53
+ * @LastEditTime: 2019-09-16 20:28:26
  * @LastEditors: Please set LastEditors
  -->
 # vue3
@@ -128,10 +128,10 @@ C:.
 ###    │          public.js 全局 一般用来维护 导航,用户信息,token等全局数据
 ###    │    这里有很多人和我提 希望吧state active getter等 继续划分,但参考在华宇的各个项目 这样细化反而会更加麻烦,按照页面或者模块进行划分 也方便开发者书写
 ###    └─views  放置主路由组件 注意命名规范
-###    ###    ├─BaseTableAudit
-###    ###    │      visualization.vue
-###    ###    │
-###        └─Configuration_information
+###       ├─BaseTableAudit
+###       │      visualization.vue
+###       │
+###       └─Configuration_information
 ###                configuration.vue
 
 
