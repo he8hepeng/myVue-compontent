@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your Hepeng
  * @Date: 2019-09-11 15:24:24
- * @LastEditTime: 2019-09-16 21:51:10
+ * @LastEditTime: 2019-09-16 21:52:22
  * @LastEditors: Please set LastEditors
  -->
 # vue3
@@ -30,6 +30,7 @@ npm run test
 ### Lints and fixes files
 ```
 npm run lint
+dwadawwa
 ```
 
 ### Customize configuration
