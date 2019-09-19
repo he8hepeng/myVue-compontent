@@ -1,8 +1,8 @@
 /*
  * @Author: Jesse-HePeng
  * @Date: 2019-09-05 17:02:36
- * @Last Modified by: Jesse-HePeng
- * @Last Modified time: 2019-09-12 16:21:23
+ * @Last Modified by: HePeng
+ * @Last Modified time: 2019-09-19 22:04:50
  */
 import cookies from '../../public/cookie.js'
 export default {
@@ -20,7 +20,6 @@ export default {
   },
   mutations: {
     GET_USER (state, _DATA) {
-      console.log(_DATA, '_DATA')
       state.userInfo = _DATA
     },
     GET_ACTIVE (state, _DATA) {
