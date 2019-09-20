@@ -56,6 +56,7 @@ export default {
     .fd-exampleCont__userName {
       width: 100%;
       height: 40px;
+      margin-top: 10px;
     }
   }
 </style>
