@@ -36,6 +36,12 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
+### GIT
+```
+https://github.com/he8hepeng/myVue-compontent.git
+```
+
+
 ### by 何鹏
 ```
  首先 欢迎使用大数据 vue摸板1.0 有很多都是个人使用的经验和习惯 也参考了网上和很多身边人的经验和习惯
