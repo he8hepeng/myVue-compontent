@@ -10,12 +10,12 @@ export default {
     userInfo: {
       userName: ''
     },
-    title: '统一业务应用系统', // 头部等地方的 title名称
-    indexActive: '1'
+    title: 'vue前端模板', // 头部等地方的 title名称
+    indexActive: '1' // 导航index 当页面刷新 导航自动定位
   },
   getters: {
     getCookie () {
-      return cookies.getCookie('token')
+      return cookies.getCookie('token') // 从cookie 返回token
     }
   },
   mutations: {
@@ -27,6 +27,9 @@ export default {
     }
   },
   actions: {
+    clearCookie() {
+      cookies.deleteCookie('token')
+    },
     setUser ({ commit }, _DATA) {
       commit('GET_USER', _DATA)
     },
