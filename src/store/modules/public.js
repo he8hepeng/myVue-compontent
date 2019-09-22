@@ -11,7 +11,7 @@ export default {
       userName: ''
     },
     title: 'vue前端模板', // 头部等地方的 title名称
-    indexActive: '1' // 导航index 当页面刷新 导航自动定位
+    indexActive: 'example' // 导航index 当页面刷新 导航自动定位
   },
   getters: {
     getCookie () {
@@ -27,7 +27,7 @@ export default {
     }
   },
   actions: {
-    clearCookie() {
+    clearCookie () {
       cookies.deleteCookie('token')
     },
     setUser ({ commit }, _DATA) {

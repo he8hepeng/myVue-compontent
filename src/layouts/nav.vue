@@ -37,11 +37,10 @@ export default {
 </script>
 <style lang="less" scoped>
 #Nav {
-  width: 150px;
-  height: 100%;
+  .size(150px;100%);
   overflow: auto;
   margin: auto;
-  background: #1655b9;
-  border-radius: 4px;
+  @{bg_c}: #1655b9;
+  .bor_r(4px);
 }
 </style>

@@ -4,7 +4,7 @@ import {
   Loading
 } from 'element-ui' // 引入elm组件
 import store from '../store/index' // 通过vuex 来存储 token等信息
-var axios = require('axios') // 未登录或登录失效的跳转
+import axios from 'axios'
 // import global from '../api/global' // 通过global来 进行baseURL
 let loadingInstance // 请求遮罩
 // 自定义判断元素类型JS
@@ -94,7 +94,7 @@ export default {
   }
 }
 // 添加一个请求拦截器
-axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(config => {
   loadingInstance = Loading.service({
     lock: true,
     text: '努力拉取中 ~>_<~',
@@ -102,11 +102,11 @@ axios.interceptors.request.use(function (config) {
   })
   config.headers.common['token'] = store.getters.getCookie // 每次发送之前 从vuex拿token携带
   return config
-}, function (error) {
+}, error => {
   return Promise.reject(error)
 })
 // 添加一个响应拦截器
-axios.interceptors.response.use(function (response) {
+axios.interceptors.response.use(response => {
   loadingInstance.close()
   // 与后台沟通 204没有实体类 但前台需要实体类用以 promise回调 so 我们自己搞 按照各业务 可以删除或修改
   if (response.status === 204) {
@@ -115,11 +115,14 @@ axios.interceptors.response.use(function (response) {
     }
   }
   return response
-}, function (error) {
+}, error => {
   loadingInstance.close()
   if (error.response !== undefined) {
-    if (error.response.status === 400 || error.response.status === 500) {
-      // 参询 强哥意见 将部分保存信息放入 details，无限时打印 方便联调调试
+    if (error.response.status === 401) {
+      // 401 未登录 跳转到login页
+      // window.location.href = `login?redirect=http://${window.location.host}/${window.location.hash}`
+    } else if (error.response.status === 400 || error.response.status === 500) {
+      // 参询 强哥意见 将部分保存信息放入 details，无限时打印 方便开发调试
       if (error.response.data.details) {
         Message.error({
           showClose: true,
@@ -131,7 +134,6 @@ axios.interceptors.response.use(function (response) {
       Message.error(error.response.data.message)
     } else {
       Message.error(error.message)
-      console.log(error.response, error)
     }
   }
   return Promise.reject(error)

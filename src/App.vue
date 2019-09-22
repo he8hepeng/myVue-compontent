@@ -7,7 +7,6 @@
 <script>
 export default {
   created () {
-    let href = location.hostname
   }
 }
 </script>

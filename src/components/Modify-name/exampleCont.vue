@@ -43,20 +43,17 @@ export default {
 </style>
 <style lang="less" scoped>
   #exampleCont {
-    width: 100%;
-    height: 100%;
+    .size(100%;100%);
 
     .fd-exampleCont__title {
-      height: 35px;
-      line-height: 35px;
+      .hh(35px);
       text-align: left;
       text-indent: 20px;
-      border-bottom: 1px solid #144069;
+      @{b_b}: .border(@color:#144069);
     }
     .fd-exampleCont__userName {
-      width: 100%;
-      height: 40px;
-      margin-top: 10px;
+      .size(100%;40px);
+      @{m_t}: 10px;
     }
   }
 </style>

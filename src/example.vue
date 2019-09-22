@@ -1,21 +1,36 @@
 <template>
   <div class="about">
-    <h1>通过vuex 模拟 登录人名称 为 {{userName}}</h1>
+    <h1>通过vuex 模拟 登录人名称 为 {{ userName }}</h1>
     <el-button type="primary" @click="showType = true">修改用户名 按需加载</el-button>
+    <el-button type="primary" @click="abc">组件传参 正常加载</el-button>
     <template v-if="showType">
-      <exampleCont/>
+      <exampleCont />
+    </template>
+    <template v-if="!showType && showType2">
+      <transmit :message1="message1" :message2="message2" :message3="message3" :message4="message4" :message5="message5" :message6="message6" />
     </template>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
+import transmit from '@/components/Modify-name/transmit.vue'
 export default {
   data () {
     return {
       showType: false,
-      list: [{ x: 2 }, { x: 3 }, { x: 4 }]
+      showType2: false,
+      list: [{ x: 2 }, { x: 3 }, { x: 4 }],
+      message1: 1,
+      message2: '123',
+      message3: true,
+      message4: [12, 321],
+      message5: {
+        a: 2
+      },
+      message6: () => {
+        console.log(this.$data)
+      }
     }
   },
   computed: {
@@ -25,7 +40,8 @@ export default {
     })
   },
   components: {
-    'exampleCont': () => import('@/components/ExampleComponents/exampleCont.vue')
+    exampleCont: () => import('@/components/Modify-name/exampleCont.vue'),
+    transmit
   },
   created () {
     // 公共 Element 方法 具体去 assets/js/mixin/globalMinxin.js 去看
@@ -60,16 +76,21 @@ export default {
           resolve()
         }, 4000)
       })
+    },
+    abc () {
+      // 错误的方式 这么写打断腿
+      this.showType2 = true
+      this.showType = false
     }
   }
 }
 </script>
 <style lang="less" scoped>
-  .about {
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
-    padding: 10px;
-  }
+.about {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
 </style>
