@@ -43,6 +43,11 @@ export default {
     exampleCont: () => import('@/components/Modify-name/exampleCont.vue'),
     transmit
   },
+  provide () {
+    return {
+      'parentClick': this.parentClick
+    }
+  },
   created () {
     // 公共 Element 方法 具体去 assets/js/mixin/globalMinxin.js 去看
     this._messages('success', '欢迎使用', 2000)
@@ -81,6 +86,9 @@ export default {
       // 错误的方式 这么写打断腿
       this.showType2 = true
       this.showType = false
+    },
+    parentClick (_state) {
+      this._messages('info', _state)
     }
   }
 }
