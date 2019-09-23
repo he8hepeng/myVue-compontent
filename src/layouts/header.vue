@@ -33,7 +33,7 @@ export default {
     h1 {
       .dib();
       font-weight: bold;
-      font-size: @font-h1;
+      .fz(@font-h1);
       @{m_l}: 130px;
       @{lt_s}: 4px;
       .clr_h(#fff; #ccc);

@@ -87,10 +87,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .about {
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
+  .size(100%;100%);
+  .b_r(4px);
+  .box_shadow(rgba(0, 0, 0, 0.3));
   padding: 10px;
 }
 </style>

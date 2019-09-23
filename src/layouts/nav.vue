@@ -41,6 +41,6 @@ export default {
   overflow: auto;
   margin: auto;
   @{bg_c}: #1655b9;
-  .bor_r(4px);
+  .b_r(4px);
 }
 </style>
