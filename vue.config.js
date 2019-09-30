@@ -43,7 +43,7 @@ function addStyleResource(rule) {
         .loader('style-resources-loader')
         .options({
             patterns: [
-                path.resolve(__dirname, 'src/assets/css/variable.less') // 需要全局导入的less
+                path.resolve(__dirname, 'src/assets/css/common/variable.less') // 需要全局导入的less
             ]
         })
 }
