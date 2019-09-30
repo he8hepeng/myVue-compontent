@@ -2,15 +2,31 @@
   <div id="Header">
     <i class="fd-header_logo"></i>
     <h1 v-text="title"></h1>
+	<span v-text="timeSpan" class="fd-time"></span>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 export default {
+  data () {
+    return {
+      timeSpan: ''
+    }
+  },
   computed: {
     ...mapState({
       title: state => state.publics.title
     })
+  },
+  created () {
+    this.setInter()
+  },
+  methods: {
+    setInter () {
+      setInterval(() => {
+         this.timeSpan = this.util._getSetTime()
+      }, 1000)
+    }
   }
 }
 </script>
@@ -37,6 +53,9 @@ export default {
       @{m_l}: 130px;
       @{lt_s}: 4px;
       .clr_h(#fff; #ccc);
+    }
+    .fd-time {
+      @{m_l}: 20px;
     }
   }
 </style>

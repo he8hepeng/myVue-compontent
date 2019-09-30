@@ -15,7 +15,10 @@ import './assets/css/index.js'
 import _ from 'lodash'
 // 引入Mock数据
 import './mock/mock'
-import _url from './src/config/url.js'
+// 在公共文件 维护所有接口
+import _url from './config/url.js'
+// 引入公共的util工具
+import util from './package/util/util.js'
 
 Vue.use(globalMixin)
 Vue.prototype._ = _
@@ -23,6 +26,7 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
 Vue.prototype.url = _url
+Vue.prototype.util = util
 
 new Vue({
   router,

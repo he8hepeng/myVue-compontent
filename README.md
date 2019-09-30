@@ -50,96 +50,106 @@ https://github.com/he8hepeng/myVue-compontent.git
 ### 文件目录如下~
 ```
 C:.
- │  .editorconfig  统一不同编辑器 代码格式
- │  .gitignore  忽略提交
- │  babel.config.js
- │  node_modules.zip
- │  package-lock.json
- │  package.json
- │  README.md
- │  tree.txt
- │  vue.config.js
- │
- ├─dist 打包之后的文件
- │  │  favicon.ico
- │  │  index.html
- │  │
- │  ├─css
- │  │      app.9640e964.css
- │  │
- │  ├─img
- │  │      logo.82b9c7a5.png
- │  │
- │  └─js
- │
- ├─node_modules
- │
- ├─public  vue3.0 入口文件以及免打包的文件 exe 插件等文件放在这里
- │  │  favicon.ico
- │  │  index.html
- │  │
- │  └─lib
- └─src
+│  .editorconfig   统一不同编辑器 代码格式
+│  .gitignore    忽略提交
+│  babel.config.js
+│  node_modules.zip
+│  package-lock.json
+│  package.json
+│  README.md
+│  tree.txt
+│  vue.config.js  webpack配置 代理 第三方插件维护等
+│  大数据前端规范.docx
+│  
+├─dist  打包之后的文件
+│  │  favicon.ico
+│  │  index.html
+│  │  
+│  ├─css
+│  │      app.9640e964.css
+│  │      
+│  ├─img
+│  │      logo.82b9c7a5.png
+│  │      
+│  └─js
+│          about.9cae4cc2.js
+│          about.9cae4cc2.js.map
+│          app.18a724dc.js
+│          app.18a724dc.js.map
+│          chunk-vendors.aa607577.js
+│          chunk-vendors.aa607577.js.map
+│          
+  
+├─public  免打包文件以及插件
+│  │  favicon.ico
+│  │  index.html
+│  │  
+│  └─lib
+└─src
     │  App.vue
-    │  example.vue
+    │  example.vue  // 演示文件
     │  main.js
-    │
-    ├─api
-    ├─assets 静态资源目录，公共的静态资源，图片，字体
+    │  
+    ├─assets  静态资源目录，公共的静态资源，图片，字体
     │  ├─css
-    │  │      common.less  项目公共样式 => 可复用的样式 通过BEM约定 类似common-component_header 命名规范命名 虽然看起来很长 但打包后很短
-    │  │      element.less  饿了么UI的公共覆盖样式 一种模块一种即可 如果多种,大概率为设计样式不统一 怼他！css约定如上
-    │  │      reset.less  去除基础样式 引入即可 不可对此文件进行修改
-    │  │      variable.less  Less的全局变量 以及全局样式模块(暂未维护) 引入vue.config.js 删除或弃用此文件 需同步修改config文件
+    │  │  │  index.js  main.js 全局入口文件
+    │  │  │  
+    │  │  └─common
+    │  │          common.less   项目公共样式 => 可复用的样式 通过BEM约定 类似common-component_header 命名规范命名 虽然看起来很长 但打包后很短
+    │  │          element.less  饿了么UI的公共覆盖样式 一种模块一种即可 如果多种,大概率为设计样式不统一 怼他！css约定如上
+    │  │          reset.less    去除基础样式 引入即可 不可对此文件进行修改
+    │  │          variable.less   Less的全局变量 以及全局样式模块(暂未维护) 引入vue.config.js 删除或弃用此文件 需同步修改config文件
     │  │
+    │  │          
+    │  ├─img
+    │  │      logo.png
+    │  │      
     │  └─js
     │      │  README.md
-    │      │
+    │      │  
     │      └─mixin
-    │              globalMinxin.js 全局的mixin文件 放入公用的方法 或者卸载global.js中 **(注意 此文件方法 会混入所有vue实例中，不可在vue实例中覆盖相同名称的方法)**
-    │
-    ├─components
-    │  │  README.md
-    │  │
-    │  └─Configuration_information  视图模块以及公用模块存放文件 注意文件名称参照引入模块相同 文件夹格式按照页面引入序列维护
-    │          definition.vue
-    │          list.less  视图模块的 外链less文件
-    │          ruleList.vue
-    │          statistics.vue
-    │
-    ├─layouts  全局模块以及外层摸板 参照nuxt.js 仅需一人维护即可
-    │      header.vue  头部组件
-    │      home.vue  入口文件
-    │      nav.vue  测导航
+    │              globalMinxin.js   全局的mixin文件 放入公用的方法 或者卸载global.js中 **(注意 此文件方法 会混入所有vue实例中，不可在vue实例中覆盖相同名称的方法)**
+    │              
+    ├─components  视图级模块以及复用模块文件夹
+    │  └─Modify-name  演示模块
+    │          element.less  演示单一模块引入less文件
+    │          exampleCont.vue
+    │          README.md
+    │          transmit.vue
+    │          
+    ├─config
+    │      config.js  网关维护文件
+    │      url.js  请求 Url通一维护文件 可模块维护
+    │      
+    ├─layouts  最高级全局模块（仅需项目负责人进行维护）
+    │      header.vue
+    │      home.vue
+    │      nav.vue
     │      README.md
-    │
-    ├─mock  前端假数据 具体方法看实例
+    │      
+    ├─mock  假数据依赖 仅限开发版本
     │      mock.js
     │      mock.json
-    │
-    ├─public  公共脚本 配置的存放文件夹 过去一直放在api文件夹中
-    │      axios.js  Axios 的封装
-    │      cookie.js  cookie的封装
-    │      global.js  用来放网关地址等 全局配置变量 方便维护
-    │
+    │      
+    ├─package  全局文件
+    │  │  axios.js   axios封装
+    │  │  cookie.js  cookie封装 用来存放token等
+    │  │  
+    │  └─util  全局工具
+    │          timeUtil.js  封装时间类工具
+    │          util.js  全局工具文件入口（暂未维护 希望各位提供）
+    │          
     ├─router
-    │      index.js  路由文件
-    │
-    ├─store
-    │  │  index.js  vuex的入口文件
-    │  │
-    │  └─modules  vuex 按模块进行划分 方便各页面以及功能的维护 尽量减少git或变量重复的情况
-    │          Configuration_information.js  按照模块进行维护 命名应尽量细致 方便区分
-    │          public.js 全局 一般用来维护 导航,用户信息,token等全局数据
-    │    这里有很多人和我提 希望吧state active getter等 继续划分,但参考在华宇的各个项目 这样细化反而会更加麻烦,按照页面或者模块进行划分 也方便开发者书写
-    └─views  放置主路由组件 注意命名规范
-       ├─BaseTableAudit
-       │      visualization.vue
-       │
-        └─Configuration_information
-                configuration.vue
+    │      index.js  全局路由文件
+    │      
+    ├─store  vuex文件夹
+    │  │  index.js  vuex 入口文件
+    │  │  
+    │  └─modules  vuex模块文件夹
+    │          public.js  全局vuex（仅限全局 项目负责人进行维护）这里有很多人和我提 希望吧state active getter等 继续划分,但参考在华宇的各个项目 这样细化反而会更加麻烦,按照页面或者模块进行划分 也方便开发者书写
+    │          
+    └─views  路由级模块
 ```
-
 ### 整理了一份 vscode的插件 有兴趣的小伙伴可以安装一下
 ```
 Auto Close Tag

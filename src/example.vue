@@ -53,7 +53,7 @@ export default {
     this._messages('success', '欢迎使用', 2000)
     // 全局的 lodash 具体其他操作去 Lodash官网去看
     this._removeListData(this.list, 'x', { x: 3 })
-    // 全局的 promise封装 这个并不强制使用
+    // 全局的 promise封装 这个只是演示
     this.asyncPromise().then(res => {
       // 修改vuex数据
       this.setUser(res.userinfo)
