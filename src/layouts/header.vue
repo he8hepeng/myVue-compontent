@@ -2,7 +2,7 @@
   <div id="Header">
     <i class="fd-header_logo"></i>
     <h1 v-text="title"></h1>
-	<span v-text="timeSpan" class="fd-time"></span>
+    <span v-text="timeSpan" class="fd-time"></span>
   </div>
 </template>
 <script>
@@ -24,7 +24,7 @@ export default {
   methods: {
     setInter () {
       setInterval(() => {
-         this.timeSpan = this.util._getSetTime()
+        this.timeSpan = this.util._getSetTime()
       }, 1000)
     }
   }

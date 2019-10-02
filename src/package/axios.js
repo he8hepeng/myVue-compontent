@@ -5,7 +5,6 @@ import {
 } from 'element-ui' // 引入elm组件
 import store from '../store/index' // 通过vuex 来存储 token等信息
 import axios from 'axios'
-// import global from '../api/global' // 通过global来 进行baseURL
 let loadingInstance // 请求遮罩
 // 自定义判断元素类型JS
 function toType (obj) {
@@ -44,11 +43,10 @@ function apiAxios (method, url, data, params, success, failure) {
   axios({
     method: method === 'postG' ? 'POST' : method,
     url: url,
-    // baseURL: global.baseUrl,
     data: data || null,
     params: params || null,
     withCredentials: false,
-    // timeout: 1000,
+    timeout: 1000, // 最大请求时间 1S
     headers: {
       'X-HTTP-Method-Override': method === 'postG' ? 'get' : '',
       'Content-Type': 'application/json'

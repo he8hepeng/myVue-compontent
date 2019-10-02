@@ -8,5 +8,5 @@
 import configUrl from './config.js'
 
 export default {
-  userInfo: '/user/userInfo'
+  userInfo: '/api/user/userInfo'
 }

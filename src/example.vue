@@ -83,7 +83,7 @@ export default {
       })
     },
     abc () {
-      // 错误的方式 这么写打断腿
+      // 错误的命名方式 这么写打断腿
       this.showType2 = true
       this.showType = false
     },
