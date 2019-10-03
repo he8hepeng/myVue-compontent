@@ -6,6 +6,9 @@
  */
 
 import timeUtil from './timeUtil.js'
+import tool from './tool.js'
+console.log(tool, 'tool')
 export default {
-  ...timeUtil
+  ...timeUtil,
+  ...tool
 }
