@@ -8,5 +8,5 @@
 import configUrl from './config.js'
 
 export default {
-  userInfo: '/api/user/userInfo'
+  [Symbol('userInfo')]: '/api/user/userInfo'
 }

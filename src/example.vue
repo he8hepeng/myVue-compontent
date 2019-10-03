@@ -65,7 +65,7 @@ export default {
     ...mapActions(['setUser']),
     asyncPromise () {
       return this._promise((resolve, reject) => {
-        this.axios.get(this.url.userInfo, { a: 2 }, { c: 4 }, res => {
+        this.axios.get(this.url['userInfo'], { a: 2 }, { c: 4 }, res => {
           resolve(res.content)
         })
       })
