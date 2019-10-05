@@ -115,24 +115,54 @@ axios.interceptors.response.use(response => {
   return response
 }, error => {
   loadingInstance.close()
-  if (error.response !== undefined) {
-    if (error.response.status === 401) {
-      // 401 未登录 跳转到login页
-      // window.location.href = `login?redirect=http://${window.location.host}/${window.location.hash}`
-    } else if (error.response.status === 400 || error.response.status === 500) {
-      // 参询 强哥意见 将部分保存信息放入 details，无限时打印 方便开发调试
-      if (error.response.data.details) {
-        Message.error({
-          showClose: true,
-          message: error.response.data.details,
-          type: 'warning',
-          duration: 0
-        })
+  let errMsg = ''
+      if (err && err.response.status) {
+        switch (err.response.status) {
+          case 401:
+            errMsg = '登录状态失效，请重新登录'
+            // localStorage.removeItem('tsToken')
+            // router.push('/login')
+            break
+          case 403:
+            errMsg = '拒绝访问'
+            break
+
+          case 408:
+            errMsg = '请求超时'
+            break
+
+          case 500:
+            errMsg = '服务器内部错误'
+            break
+
+          case 501:
+            errMsg = '服务未实现'
+            break
+
+          case 502:
+            errMsg = '网关错误'
+            break
+
+          case 503:
+            errMsg = '服务不可用'
+            break
+
+          case 504:
+            errMsg = '网关超时'
+            break
+
+          case 505:
+            errMsg = 'HTTP版本不受支持'
+            break
+
+          default:
+            errMsg = err.response.data.msg
+            break
+        }
+      } else {
+        errMsg = err
       }
-      Message.error(error.response.data.message)
-    } else {
-      Message.error(error.message)
-    }
-  }
-  return Promise.reject(error)
+
+      Message.error(errMsg)
+      return Promise.reject(errMsg)
 })
