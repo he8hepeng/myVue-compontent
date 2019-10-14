@@ -183,3 +183,18 @@ vscode-icons
 
 可能会有一些美化插件 有个蛋用啊！~ 总的来说 对代码一如了然 减少阅读成本 节约的时间 上个神儿..睡一会.. 也可观的...对吧
 ```
+
+#### 常见报错
+
+### 文件编译错误
+```
+These relative modules were not found:
+
+* ./common/reset.less in ./src/assets/css/index.js
+* ./common/common.less in ./src/assets/css/index.js
+* ./common/element.less in ./src/assets/css/index.js
+```
+## 解决方法
+```
+npm install stylus-loader css-loader style-loader less-loader --save-dev
+```
