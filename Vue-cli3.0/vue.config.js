@@ -1,6 +1,9 @@
 const webpack = require('webpack')
 const path = require('path')
 module.exports = {
+  publicPath: './',
+  // 输出文件目录
+  outputDir: 'dist',
   lintOnSave: true,
   devServer: {
     proxy: {

@@ -6,6 +6,7 @@ import {
 import store from '../store/index' // 通过vuex 来存储 token等信息
 import axios from 'axios'
 let loadingInstance // 请求遮罩
+let modelIndex = 0 // 并发 蒙层计数
 // 自定义判断元素类型JS
 function toType (obj) {
   return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
@@ -93,11 +94,14 @@ export default {
 }
 // 添加一个请求拦截器
 axios.interceptors.request.use(config => {
-  loadingInstance = Loading.service({
-    lock: true,
-    text: '努力拉取中 ~>_<~',
-    background: 'rgba(0, 0, 0, 0.7)'
-  })
+  if (modelIndex === 0) {
+    loadingInstance = Loading.service({
+      lock: true,
+      text: '努力拉取中 ~>_<~',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+  }
+  modelIndex++
   config.headers.common['token'] = store.getters.getCookie // 每次发送之前 从vuex拿token携带
   return config
 }, error => {
@@ -114,7 +118,10 @@ axios.interceptors.response.use(response => {
   }
   return response
 }, error => {
-  loadingInstance.close()
+  modelIndex--
+  if (modelIndex === 0) {
+    loadingInstance.close()
+  }
   let errMsg = ''
       if (err && err.response.status) {
         switch (err.response.status) {
