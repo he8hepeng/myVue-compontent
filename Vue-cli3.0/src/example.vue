@@ -59,7 +59,7 @@ export default {
       this.setUser(res.userinfo)
     })
     this.setAsync()
-    console.log(this._difference({a:2,b:3,f:2,c:5}, {a:2,b:3,c:4}))
+    console.log(this._difference({ a: 2, b: 3, f: 2, c: 5 }, { a: 2, b: 3, c: 4 }))
   },
   methods: {
     // 注入 vuex 方法
