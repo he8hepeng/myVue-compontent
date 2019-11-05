@@ -62,7 +62,7 @@ C:.
 │  .editorconfig   统一不同编辑器 代码格式
 │  .gitignore    忽略提交
 │  babel.config.js
-│  node_modules.zip
+│  node_modules.zip 依赖包
 │  package-lock.json
 │  package.json
 │  README.md
@@ -71,24 +71,7 @@ C:.
 │  大数据前端规范.docx
 │
 ├─dist  打包之后的文件
-│  │  favicon.ico
-│  │  index.html
-│  │
-│  ├─css
-│  │      app.9640e964.css
-│  │
-│  ├─img
-│  │      logo.82b9c7a5.png
-│  │
-│  └─js
-│          about.9cae4cc2.js
-│          about.9cae4cc2.js.map
-│          app.18a724dc.js
-│          app.18a724dc.js.map
-│          chunk-vendors.aa607577.js
-│          chunk-vendors.aa607577.js.map
 │
-
 ├─public  免打包文件以及插件
 │  │  favicon.ico
 │  │  index.html
@@ -126,29 +109,31 @@ C:.
     │          README.md
     │          transmit.vue
     │
-    ├─config
-    │      config.js  网关维护文件
-    │      url.js  请求 Url通一维护文件 可模块维护
-    │
     ├─layouts  最高级全局模块（仅需项目负责人进行维护）
     │      header.vue
     │      home.vue
     │      nav.vue
     │      README.md
     │
-    ├─mock  假数据依赖 仅限开发版本
-    │      mock.js
-    │      mock.json
     │
     ├─package  全局文件
     │  │  axios.js   axios封装
     │  │  cookie.js  cookie封装 用来存放token等
     │  │
-    │  └─util  全局工具
-    │          timeUtil.js  封装时间类工具
-    │          match.js  封装正则类工具
-    │          tool.js  封装操作类工具
-    │          util.js  全局工具文件入口（暂未维护 希望各位提供）
+    │  ├─util  全局工具
+    │  │       timeUtil.js  封装时间类工具
+    │  │       match.js  封装正则类工具
+    │  │       tool.js  封装操作类工具
+    │  │       util.js  全局工具文件入口（暂未维护 希望各位提供）
+    │  │
+    │  ├─config
+    │  │      config.js  网关维护文件
+    │  │      url.js  请求 Url通一维护文件 可模块维护
+    │  │
+    │  │
+    │  └─mock  假数据依赖 仅限开发版本
+    │      mock.js
+    │      mock.json
     │
     ├─router
     │      index.js  全局路由文件
@@ -157,7 +142,7 @@ C:.
     │  │  index.js  vuex 入口文件
     │  │
     │  └─modules  vuex模块文件夹
-    │          public.js  全局vuex（仅限全局 项目负责人进行维护）这里有很多人和我提 希望吧state active getter等 继续划分,但参考在华宇的各个项目 这样细化反而会更加麻烦,按照页面或者模块进行划分 也方便开发者书写
+    │             public.js  全局vuex（仅限全局 项目负责人进行维护）这里有很多人和我提 希望吧state active getter等 继续划分,但参考在华宇的各个项目 这样细 │             化反而会更加麻烦,按照页面或者模块进行划分 也方便开发者书写
     │
     └─views  路由级模块
 ```

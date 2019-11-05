@@ -87,8 +87,7 @@ function apiAxiosDownload (method, url, data, params, success, failure) {
     data: data || null,
     params: params || null,
     responseType: 'blob',
-    withCredentials: false,
-    timeout: 1000
+    withCredentials: false
   }).then(function (res) {
     console.log(res)
     success(res.data)

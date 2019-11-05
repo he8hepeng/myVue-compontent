@@ -76,7 +76,7 @@ function apiAxios (method, url, data, params, success, failure) {
  * @param {any} success 正确回调
  * @param {any} failure 错误回调
  */
-function apiAxiosDownload(method, url, data, params, success, failure) {
+function apiAxiosDownload (method, url, data, params, success, failure) {
   if (params && typeof params !== 'string') {
     params = filterNull(params)
   }
@@ -87,8 +87,7 @@ function apiAxiosDownload(method, url, data, params, success, failure) {
     data: data || null,
     params: params || null,
     responseType: 'blob',
-    withCredentials: false,
-    timeout: 1000
+    withCredentials: false
   }).then(function (res) {
     console.log(res)
     success(res.data)

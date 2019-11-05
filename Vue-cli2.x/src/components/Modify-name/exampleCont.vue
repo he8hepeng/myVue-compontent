@@ -49,7 +49,8 @@ export default {
       .hh(35px);
       text-align: left;
       text-indent: 20px;
-      .border(@color:#144069);
+      @{m_t}: 30px;
+      .border(1px,solid,#144069);
     }
     .fd-exampleCont__userName {
       .size(100%;40px);

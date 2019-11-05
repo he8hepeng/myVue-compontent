@@ -2,12 +2,26 @@
  * @Author: hepeng
  * @Date: 2019-10-04 00:10:10
  * @Last Modified by: HePeng
- * @Last Modified time: 2019-10-30 15:49:21
+ * @Last Modified time: 2019-11-05 16:38:40
  */
 export default {
   install (Vue) {
     Vue.mixin({
       methods: {
+        /**
+         * 文件导出
+         *
+         * @param {any} res 文件流
+         * @param {string} [_name='导出文件'] 文件名称
+         * @param {string} [_type='.xls'] 文件尾缀 默认excel
+         */
+        _blob (res, _name = '导出文件', _type = '.xls') {
+          const blob = new Blob([res], {
+            type: 'application/octet-stream;charset=utf-8'
+          })
+          const fileName = _name + _type
+          this.$fileSaver.saveAs(blob, fileName)
+        },
         /**
           * 公共的二次确认方法
           * 用于新建 删除等需要二次提示的功能

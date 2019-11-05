@@ -10,6 +10,7 @@
       <transmit :message1="message1" :message2="message2" :message3="message3" :message4="message4" :message5="message5" :message6="message6" />
     </template>
     <div class="fd-less">我是演示less的</div>
+    <div class="fd-lessFS">我是演示less的</div>
   </div>
 </template>
 
@@ -91,6 +92,10 @@ export default {
     },
     parentClick (_state) {
       this._messages('info', _state)
+    },
+    // 导出文件实例 数据流 仅为展示代码
+    exportExcel () {
+
     }
   }
 }
@@ -106,5 +111,11 @@ export default {
 .fd-less {
   .ts(3px,#000);
   .bg_gradientP(right; #fff, #000;);
+}
+.fd-lessFS {
+  .fz(22px);
+  .dib();
+  font-weight: bold;
+  .t_gradientP(right;red, blue;);
 }
 </style>

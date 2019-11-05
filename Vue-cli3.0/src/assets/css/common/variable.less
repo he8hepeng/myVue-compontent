@@ -2,7 +2,7 @@
  * @Author: hepeng
  * @Date: 2019-10-04 00:10:10
  * @Last Modified by: HePeng
- * @Last Modified time: 2019-11-04 16:28:38
+ * @Last Modified time: 2019-11-05 17:46:53
  */
 @font-color: #4f5e7b;
 @font-size: 16px;
@@ -112,7 +112,21 @@
   background-image: linear-gradient(@position, @color);
 }
 
+// 文字渐变色
+.t_gradientT(@color: red, blue;) {
+  background: linear-gradient(@color);
+  .t_clip();
+}
 
+.t_gradientP(@position, @color) {
+  background: linear-gradient(to @position, @color);
+  .t_clip();
+}
+
+.t_clip() {
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
 
 /******************************** 字体 ***********************************/

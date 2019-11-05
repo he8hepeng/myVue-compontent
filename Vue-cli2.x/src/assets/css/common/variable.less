@@ -1,8 +1,8 @@
 /*
  * @Author: hepeng
  * @Date: 2019-10-04 00:10:10
- * @Last Modified by: hepeng
- * @Last Modified time: 2019-10-04 00:10:10
+ * @Last Modified by: HePeng
+ * @Last Modified time: 2019-11-05 17:46:53
  */
 @font-color: #4f5e7b;
 @font-size: 16px;
@@ -58,29 +58,9 @@
   _height: @min-h;
 }
 
-// 内联块级元素, 兼容IE6
-.dib() {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-}
-
-// 固定定位, 兼容IE6
-.fixed() {
-  position: fixed;
-  _position: absolute;
-  *zoom: 1;
-}
-
 // 边框
 .border(@px: 1px; @type: solid; @color: #b1cef2) {
   border: @px @type @color;
-}
-
-// 图片最大
-.bg_max() {
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 
 // 阴影
@@ -89,7 +69,7 @@
 }
 
 // 圆角
-.b_r (@radius: 4px) {
+.b_r(@radius: 4px) {
   border-radius: @radius;
   -moz-border-radius: @radius;
   -webkit-border-radius: @radius;
@@ -109,34 +89,45 @@
   }
 }
 
-// 多个子项布局
-.list(float; @w: 25%) {
-  float: left;
-  width: @w;
+/******************************** 颜色 背景类 ***********************************/
+
+// 图片最大
+.bg_max() {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-.list(inline; @w: 25%) {
-  .dib();
-  width: @w;
+// 上下渐变色 .bg_gradientP(#fff, #000;);
+.bg_gradientT(@color) {
+  background-image: linear-gradient(@color);
 }
 
-.list(flex) {
-  flex: 1;
-  display: flex;
+// 方向渐变色  .bg_gradientP(right; #fff, #000;);
+.bg_gradientP(@position, @color) {
+  background-image: linear-gradient(to @position, @color);
 }
 
-// 定位
-.pt(a) {
-  position: absolute;
+// 方向渐变色 -90deg
+.bg_gradientDeg(@position, @color) {
+  background-image: linear-gradient(@position, @color);
 }
 
-.pt(r) {
-  position: relative;
+// 文字渐变色
+.t_gradientT(@color: red, blue;) {
+  background: linear-gradient(@color);
+  .t_clip();
 }
 
-.pt(f) {
-  position: fixed;
+.t_gradientP(@position, @color) {
+  background: linear-gradient(to @position, @color);
+  .t_clip();
 }
+
+.t_clip() {
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 
 /******************************** 字体 ***********************************/
 
@@ -160,6 +151,10 @@
   text-align: @tl;
 }
 
+// 字体阴影
+.ts(@position: 5px; @color) {
+  text-shadow: @position @position @position @color;
+}
 // 字体颜色
 .clr_h(@color) {
   color: @color;
@@ -211,6 +206,7 @@
   unicode-bidi: bidi-override;
 }
 
+// 从上至下排版效果
 .retext(y) {
   writing-mode: tb-rl;
   writing-mode: vertical-rl;
@@ -222,7 +218,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 /******************************** 布局类 定位居中 ***********************************/
 .posi-center() {
@@ -257,9 +252,53 @@
   flex-direction: @direction;
 }
 
-// 弹性和居中
+// 弹性盒居中
 .flex_c () {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+// 内联块级元素, 兼容IE6
+.dib() {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+// 固定定位, 兼容IE6
+.fixed() {
+  position: fixed;
+  _position: absolute;
+  *zoom: 1;
+}
+
+
+// 多个子项布局
+.list(float; @w: 25%) {
+  float: left;
+  width: @w;
+}
+
+.list(inline; @w: 25%) {
+  .dib();
+  width: @w;
+}
+
+.list(flex) {
+  flex: 1;
+  display: flex;
+}
+
+// 定位
+.pt(a) {
+  position: absolute;
+}
+
+.pt(r) {
+  position: relative;
+}
+
+.pt(f) {
+  position: fixed;
 }

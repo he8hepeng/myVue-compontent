@@ -13,10 +13,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/index.js'
 // 引入lodash
 import _ from 'lodash'
+// 引入自定义
+import '@/assets/js/directive/index.js'
 // 引入Mock数据
-import './mock/mock'
+import './package/mock/mock'
 // 在公共文件 维护所有接口
-import _url from './config/url.js'
+import _url from './package/config/url.js'
 // 引入公共的util工具
 import util from './package/util/util.js'
 
