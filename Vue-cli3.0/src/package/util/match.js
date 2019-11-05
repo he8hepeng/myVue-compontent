@@ -8,7 +8,7 @@
 
 export default {
   _jwt (url) {
-    return url.match("/?jwt=(.*?)(&|#).*")
+    return url.match('/?jwt=(.*?)(&|#).*')
   },
   _phone (_phone) { // 验证手机号
     return /^1[3|4|5|8][0-9]\d{4,8}$/.test(_phone)
@@ -31,7 +31,7 @@ export default {
   _chinese (_text) { // 效验中文
     return /^[\u4e00-\u9fa5]{0,}$/.test(_text)
   },
-  _hasChinese(_text) { // 包含中文
+  _hasChinese (_text) { // 包含中文
     return /[\u4E00-\u9FA5]/.test(_text)
   }
 }

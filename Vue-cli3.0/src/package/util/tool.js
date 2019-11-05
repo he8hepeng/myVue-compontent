@@ -65,10 +65,10 @@ export default {
     * @param {*} _array 必须数组以及 数字
     * @returns Array
   */
-  _summation (_array) {                                                                                                                                    
+  _summation (_array) {
     return _array.reduce(function (prev, cur) {
       return prev + cur
     }, 0)
-  },
+  }
 
 }
