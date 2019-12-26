@@ -47,7 +47,6 @@ function apiAxios (method, url, data, params, success, failure) {
     data: data || null,
     params: params || null,
     withCredentials: false,
-    timeout: 1000, // 最大请求时间 1S
     headers: {
       'X-HTTP-Method-Override': method === 'postG' ? 'get' : '',
       'Content-Type': 'application/json'
@@ -130,7 +129,7 @@ export default {
 }
 // 添加一个请求拦截器
 axios.interceptors.request.use(config => {
-  // 为了解决 promise.all的 多个参数 无法计算遮罩 增加遮罩计数器
+  // 为了解决 promise.all的 多个参数 无法计算遮罩 增加遮罩计数器 by--刘春阳 徐速成
   if (modelIndex === 0) {
     loadingInstance = Loading.service({
       lock: true,
@@ -140,6 +139,18 @@ axios.interceptors.request.use(config => {
   }
   modelIndex++
   config.headers.common['token'] = store.getters.getCookie // 每次发送之前 从vuex拿token携带
+  config.headers.common["User-Info"] = store.getters.getUserInfo // 将用户信息等数据 放到header中发给后台 by--绍奎涛
+  if (config.method == "post" || config.method == "postG") { // 发现ie下有从缓存拿数据的bug 所以在所有请求加上时间戳 by--刘春阳
+    // config.data = {
+    //   ...config.data,
+    //   _t: Date.parse(new Date()) / 1000
+    // }
+  } else {
+    config.params = {
+      _t: Date.parse(new Date()) / 1000,
+      ...config.params
+    }
+  }
   return config
 }, error => {
   return Promise.reject(error)

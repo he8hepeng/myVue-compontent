@@ -2,7 +2,7 @@
  * @Author: hepeng
  * @Date: 2019-10-04 00:10:10
  * @Last Modified by: HePeng
- * @Last Modified time: 2019-11-05 16:38:40
+ * @Last Modified time: 2019-12-18 09:27:41
  */
 export default {
   install (Vue) {
@@ -14,10 +14,25 @@ export default {
          * @param {any} res 文件流
          * @param {string} [_name='导出文件'] 文件名称
          * @param {string} [_type='.xls'] 文件尾缀 默认excel
+         * @rerurns   {undefined}  无返回值
          */
         _blob (res, _name = '导出文件', _type = '.xls') {
+          switch (_type) {
+            case ".xls":
+              let _blolType = "application/vnd.ms-excel";
+            case ".doc":
+              let _blolType = "application/msword";
+            case ".docx":
+              let _blolType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            case ".xlsx":
+              let _blolType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            case ".ppt":
+              let _blolType = "application/vnd.ms-powerpoint";
+            case ".pptx":
+              let _blolType = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+          }
           const blob = new Blob([res], {
-            type: 'application/octet-stream;charset=utf-8'
+            type: _blolType
           })
           const fileName = _name + _type
           this.$fileSaver.saveAs(blob, fileName)
@@ -28,6 +43,7 @@ export default {
           * @param {any} _text 提示信息
           * @param {any} success 确认回调
           * @param {any} close 取消回调
+          * @rerurns   {undefined}  无返回值
         */
         _confirmMessage (_text, success, close) {
           this.$confirm(_text, '提示', {
@@ -48,6 +64,7 @@ export default {
           * @param {any} _type 状态 success / error
           * @param {any} _text 提示的信息
           * @param {any} _timer 时间 不传则为2000
+          * @rerurns   {undefined}  无返回值
         */
         _messages (_type, _text, _timer) {
           this.$message({
@@ -62,6 +79,7 @@ export default {
           * @param {any} _List 目标数列
           * @param {any} _key 需 匹配的字段名
           * @param {any} _data 需 匹配的字段数据
+          * @rerurns   {undefined}  无返回值
         */
         _removeListData (_List, _key, _data) {
           return this._.pullAllBy(_List, [_data], _key)
@@ -72,6 +90,7 @@ export default {
           * @param {any} _List 目标数列
           * @param {any} _key 过滤的字段名称
           * @param {any} _data 过滤的字段数据
+          * @rerurns   {undefined}  无返回值
         */
         _filter (_list, _key, _data) {
           return this._.filter(_list, [_key, _data])

@@ -4,7 +4,8 @@ module.exports = {
   publicPath: './',
   // 输出文件目录
   outputDir: 'dist',
-  lintOnSave: true,
+  // assetsDir: 'static', // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
+  lintOnSave: true, // 是否lint错误
   devServer: {
     proxy: {
       // proxy all requests starting with /api to jsonplaceholder
@@ -26,13 +27,18 @@ module.exports = {
   chainWebpack: config => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
     types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
+    config.resolve.alias  // 自定义目录别名 感谢 娄赫曦
+      .set('@', resolve('src'))
+      .set('@assets', resolve('src/assets'))
+      .set('@common', resolve('src/components/common')) // 公共模块
   },
   css: {
     loaderOptions: {
       less: {
         javascriptEnabled: true
       }
-    }
+    },
+    extract: true // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中 (而不是动态注入到 JavaScript 中的 inline 代码)。 生产环境下是 true，开发环境下是 false
   },
   configureWebpack: {
     plugins: [
@@ -40,6 +46,21 @@ module.exports = {
         $: 'jquery',
         jQuery: 'jquery',
         'windows.jQuery': 'jquery'
+        // snapsvg: 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
+        // 'window.snapsvg': 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'  snapsvg 3.0插件引入写法
+      })
+    ]
+  },
+  optimization: { // webpack打包 自动去除debugger 以及 console 感谢统计子系统
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          warnings: false,
+          compress: {
+            drop_console: true, //console
+            drop_debugger: false // pure_funcs: ['console.log']移除
+          }
+        }
       })
     ]
   }

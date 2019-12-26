@@ -6,6 +6,7 @@ import store from './store/index.js'
 import axios from './package/axios.js'
 // 引入全局mixin 方法
 import globalMixin from './assets/js/mixin/globalMinxin.js'
+import fileSaver from "file-saver";
 // 引入element
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -29,6 +30,7 @@ Vue.config.productionTip = false
 Vue.prototype.axios = axios
 Vue.prototype.url = _url
 Vue.prototype.util = util
+Vue.prototype.$fileSaver = fileSaver
 
 new Vue({
   router,
