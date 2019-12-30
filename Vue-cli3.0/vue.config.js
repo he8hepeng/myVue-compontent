@@ -27,10 +27,10 @@ module.exports = {
   chainWebpack: config => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
     types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
-    config.resolve.alias  // 自定义目录别名 感谢 娄赫曦
-      .set('@', resolve('src'))
-      .set('@assets', resolve('src/assets'))
-      .set('@common', resolve('src/components/common')) // 公共模块
+    config.resolve.alias // 自定义目录别名 感谢 娄赫曦
+      .set('@', resolvePath('src'))
+      .set('@assets', resolvePath('src/assets'))
+      .set('@common', resolvePath('src/components/common')) // 公共模块
   },
   css: {
     loaderOptions: {
@@ -50,19 +50,6 @@ module.exports = {
         // 'window.snapsvg': 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'  snapsvg 3.0插件引入写法
       })
     ]
-  },
-  optimization: { // webpack打包 自动去除debugger 以及 console 感谢统计子系统
-    minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          warnings: false,
-          compress: {
-            drop_console: true, //console
-            drop_debugger: false // pure_funcs: ['console.log']移除
-          }
-        }
-      })
-    ]
   }
 }
 
@@ -74,4 +61,8 @@ function addStyleResource (rule) {
         path.resolve(__dirname, 'src/assets/css/common/variable.less') // 需要全局导入的less
       ]
     })
+}
+
+function resolvePath (dir) {
+  return path.join(__dirname, dir)
 }
