@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   publicPath: './',
   // 输出文件目录
@@ -31,6 +32,24 @@ module.exports = {
       .set('@', resolve('src'))
       .set('@assets', resolve('src/assets'))
       .set('@common', resolve('src/components/common')) // 公共模块
+    if (process.env.NODE_ENV === "production") {
+      // 为生产环境修改配置...
+      // 用来打包删除所有config以及debugger,true打开
+      config.optimization.minimizer[
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              warnings: false,
+              drop_console: true, // console
+              drop_debugger: false,
+              pure_funcs: ["console.log"] // 移除console
+            }
+          }
+        })
+      ];
+    } else {
+      // 为开发环境修改配置...
+    }
   },
   css: {
     loaderOptions: {
@@ -50,19 +69,6 @@ module.exports = {
         // 'window.snapsvg': 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'  snapsvg 3.0插件引入写法
       })
     ]
-  },
-  optimization: { // webpack打包 自动去除debugger 以及 console 感谢统计子系统
-    minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          warnings: false,
-          compress: {
-            drop_console: true, //console
-            drop_debugger: false // pure_funcs: ['console.log']移除
-          }
-        }
-      })
-    ]
   }
 }
 
@@ -74,4 +80,8 @@ function addStyleResource (rule) {
         path.resolve(__dirname, 'src/assets/css/common/variable.less') // 需要全局导入的less
       ]
     })
+}
+
+function resolve (dir) {
+  return path.join(__dirname, dir)
 }
