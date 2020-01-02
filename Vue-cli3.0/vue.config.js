@@ -28,10 +28,10 @@ module.exports = {
   chainWebpack: config => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
     types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
-    config.resolve.alias  // 自定义目录别名 感谢 娄赫曦
-      .set('@', resolve('src'))
-      .set('@assets', resolve('src/assets'))
-      .set('@common', resolve('src/components/common')) // 公共模块
+    config.resolve.alias // 自定义目录别名 感谢 娄赫曦
+      .set("@", resolvePath("src"))
+      .set("@assets", resolvePath("src/assets"))
+      .set("@common", resolvePath("src/components/common")); // 公共模块
     if (process.env.NODE_ENV === "production") {
       // 为生产环境修改配置...
       // 用来打包删除所有config以及debugger,true打开
@@ -82,6 +82,6 @@ function addStyleResource (rule) {
     })
 }
 
-function resolve (dir) {
+function resolvePath (dir) {
   return path.join(__dirname, dir)
 }
