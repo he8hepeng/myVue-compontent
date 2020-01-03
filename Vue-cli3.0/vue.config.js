@@ -1,33 +1,36 @@
 const webpack = require('webpack')
 const path = require('path')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 module.exports = {
-  publicPath: './',
+  publicPath: "./",
   // 输出文件目录
-  outputDir: 'dist',
+  outputDir: "dist",
   // assetsDir: 'static', // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
   lintOnSave: true, // 是否lint错误
   devServer: {
     proxy: {
       // proxy all requests starting with /api to jsonplaceholder
-      '/api': {
-        target: 'http://localhost:8080', // 代理接口
+      "/api": {
+        target: "http://localhost:8080", // 代理接口
         changeOrigin: true,
         pathRewrite: {
-          '^/api': '/mock' // 代理的路径
+          "^/api": "/mock" // 代理的路径
         },
-        onProxyReq: function (proxyReq, req, res) {
+        onProxyReq: function(proxyReq, req, res) {
           // 实在不知道代理后的路径，可以在这里打印出出来看看
-          console.log('原路径：' + req.originalUrl, '代理路径：' + req.path)
+          console.log("原路径：" + req.originalUrl, "代理路径：" + req.path);
         }
       }
     },
-    host: 'localhost',
-    port: '8080'
+    host: "localhost",
+    port: "8080"
   },
   chainWebpack: config => {
-    const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
-    types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
+    const types = ["vue-modules", "vue", "normal-modules", "normal"];
+    types.forEach(type =>
+      addStyleResource(config.module.rule("less").oneOf(type))
+    );
     config.resolve.alias // 自定义目录别名 感谢 娄赫曦
       .set("@", resolvePath("src"))
       .set("@assets", resolvePath("src/assets"))
@@ -62,15 +65,28 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'windows.jQuery': 'jquery'
+        $: "jquery",
+        jQuery: "jquery",
+        "windows.jQuery": "jquery"
         // snapsvg: 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
         // 'window.snapsvg': 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'  snapsvg 3.0插件引入写法
+      }),
+      new webpack.DllReferencePlugin({
+        context: process.cwd(),
+        manifest: require("./public/vendor/vendor-manifest.json")
+      }),
+      // 将 dll 注入到 生成的 html 模板中
+      new AddAssetHtmlPlugin({
+        // dll文件位置
+        filepath: path.resolve(__dirname, "./public/vendor/*.js"),
+        // dll 引用路径
+        publicPath: "./vendor",
+        // dll最终输出的目录
+        outputPath: "./vendor"
       })
     ]
   }
-}
+};
 
 function addStyleResource (rule) {
   rule.use('style-resource')
