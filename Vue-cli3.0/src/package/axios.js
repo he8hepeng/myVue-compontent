@@ -158,34 +158,41 @@ axios.interceptors.request.use(config => {
 // 添加一个响应拦截器
 axios.interceptors.response.use(
   response => {
-    loadingInstance.close();
+    closeLoding()
     // 与后台沟通 204没有实体类 但前台需要实体类用以 promise回调 so 我们自己搞 按照各业务 可以删除或修改
     if (response.status === 204) {
       response.data = {
         content: []
       };
     }
-    return response;
+    return response
   },
   error => {
-    modelIndex--;
-    if (modelIndex === 0) {
-      loadingInstance.close();
-    }
+    closeLoding()
     if (error.response !== undefined) {
       if (
         error.config.responseType === "blob" &&
         error.response.data.type === "application/json"
       ) {
         let reader = new FileReader();
-        reader.readAsText(error.response.data, "utf-8");
+        reader.readAsText(error.response.data, "utf-8")
         reader.onload = e => {
-          Message.error(JSON.parse(reader.result));
+          Message.error(JSON.parse(reader.result))
         };
       } else {
-        Message.error(error.response.data.message);
+        Message.error(error.response.data.message)
       }
     }
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
 );
+
+
+function closeLoding() {
+  modelIndex--;
+  if (modelIndex === 0) {
+    if (loadingInstance) {
+      loadingInstance.close()
+    }
+  }
+}
