@@ -25,6 +25,7 @@ module.exports = {
     host: 'localhost',
     port: '8080'
   },
+  transpileDependencies:['normalize-url', 'mini-css-extract-plugin', 'prepend-http', 'sort-keys'],
   chainWebpack: config => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
     types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
