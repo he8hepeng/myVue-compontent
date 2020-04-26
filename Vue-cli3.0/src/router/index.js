@@ -1,8 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-Vue.use(Router)
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
+Vue.use(Router)
+Router.beforeEach((to, from, next) => {
+  console.log(to, from, next)
+  next()
+})
 export default new Router({
   mode: 'hash',
   base: process.env.BASE_URL,

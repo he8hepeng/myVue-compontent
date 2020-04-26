@@ -22,6 +22,8 @@ import './package/mock/mock'
 import _url from './package/config/url.js'
 // 引入公共的util工具
 import util from './package/util/util.js'
+// 全局组件
+import './components/common/index.js'
 
 Vue.use(globalMixin)
 Vue.prototype._ = _

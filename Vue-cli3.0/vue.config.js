@@ -33,24 +33,6 @@ module.exports = {
       .set("@", resolvePath("src"))
       .set("@assets", resolvePath("src/assets"))
       .set("@common", resolvePath("src/components/common")); // 公共模块
-    if (process.env.NODE_ENV === "production") {
-      // 为生产环境修改配置...
-      // 用来打包删除所有config以及debugger,true打开
-      config.optimization.minimizer[
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            compress: {
-              warnings: false,
-              drop_console: true, // console
-              drop_debugger: false,
-              pure_funcs: ["console.log"] // 移除console
-            }
-          }
-        })
-      ];
-    } else {
-      // 为开发环境修改配置...
-    }
   },
   css: {
     loaderOptions: {
@@ -60,16 +42,24 @@ module.exports = {
     },
     extract: true // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中 (而不是动态注入到 JavaScript 中的 inline 代码)。 生产环境下是 true，开发环境下是 false
   },
-  configureWebpack: {
-    plugins: [
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'windows.jQuery': 'jquery'
-        // snapsvg: 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
-        // 'window.snapsvg': 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'  snapsvg 3.0插件引入写法
-      })
-    ]
+  configureWebpack: (config) => {
+    config.plugins.push(new webpack.ProvidePlugin({
+      Snap: 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
+      'window.snapsvg': 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
+    }))
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            drop_debugger: true,
+            drop_console: true // 生产环境自动删除console
+          },
+          warnings: false
+        },
+        sourceMap: false,
+        parallel: true // 使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
+      }))
+    }
   }
 }
 

@@ -162,6 +162,11 @@ C:.
     └─views  路由级模块
 ```
 
+### 
+
+
+
+
 ### 整理了一份 vscode 的插件 有兴趣的小伙伴可以安装一下
 
 ```
@@ -184,7 +189,7 @@ vscode-icons
 可能会有一些美化插件 有个蛋用啊！~ 总的来说 对代码一如了然 减少阅读成本 节约的时间 上个神儿..睡一会.. 也可观的...对吧
 ```
 
-#### 常见报错
+### 常见报错
 
 ### 文件编译错误
 ```
@@ -194,7 +199,12 @@ These relative modules were not found:
 * ./common/common.less in ./src/assets/css/index.js
 * ./common/element.less in ./src/assets/css/index.js
 ```
-## 解决方法
+#### 解决方法
 ```
 npm install stylus-loader css-loader style-loader less-loader --save-dev
+```
+
+### 调用导出 乱码错误
+```
+首先排除后台问题后 查看是否引入mock 引入mock会导致下载错误
 ```

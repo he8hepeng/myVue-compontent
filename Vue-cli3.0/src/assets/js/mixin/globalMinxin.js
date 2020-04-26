@@ -1,13 +1,21 @@
 /*
  * @Author: hepeng
  * @Date: 2019-10-04 00:10:10
- * @Last Modified by: hepeng
- * @Last Modified time: 2019-12-30 09:12:57
+ * @Last Modified by: HePeng
+ * @Last Modified time: 2020-04-26 17:20:37
  */
+import qs from 'qs'
 export default {
   install (Vue) {
     Vue.mixin({
       methods: {
+        /**
+         * 参数格式化
+         * @param {params} params
+         */
+        paramsSerializer (params) {
+          return qs.stringify(params, { arrayFormat: 'repeat' })
+        },
         /**
          * 文件导出
          *
@@ -37,6 +45,8 @@ export default {
             case '.pptx':
               _blolType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
               break
+            case '.zip':
+              _blolType = 'application/octet-stream;charset=utf-8'
           }
           const blob = new Blob([res], {
             type: _blolType
