@@ -43,10 +43,27 @@ module.exports = {
     extract: true // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中 (而不是动态注入到 JavaScript 中的 inline 代码)。 生产环境下是 true，开发环境下是 false
   },
   configureWebpack: (config) => {
-    config.plugins.push(new webpack.ProvidePlugin({
-      Snap: 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
-      'window.snapsvg': 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
-    }))
+    config.plugins.push(
+      new webpack.ProvidePlugin({
+        Snap:
+          "imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js",
+        "window.snapsvg":
+          "imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js"
+      }),
+      new webpack.DllReferencePlugin({
+        context: process.cwd(),
+        manifest: require("./public/vendor/vendor-manifest.json")
+      }),
+      // 将 dll 注入到 生成的 html 模板中
+      new AddAssetHtmlPlugin({
+        // dll文件位置
+        filepath: path.resolve(__dirname, "./public/vendor/*.js"),
+        // dll 引用路径
+        publicPath: "./vendor",
+        // dll最终输出的目录
+        outputPath: "./vendor"
+      })
+    );
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(new UglifyJsPlugin({
         uglifyOptions: {

@@ -8,6 +8,19 @@
 
 # vue3
 
+## 使用步奏
+```
+npm i
+npm i add-asset-html-webpack-plugin clean-webpack-plugin uglifyjs-webpack-plugin
+npm run dll
+npm run serve
+```
+## DLL优化说明
+```
+减少静态资源打包时间 将不常用的第三方在webpack.dll.js中配置引用
+打包 npm run dll
+打包结束后 npm run serve 体验快速的热更新吧~
+```
 ## Project setup
 
 ```
