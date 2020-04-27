@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 module.exports = {
   publicPath: './',
   // 输出文件目录
