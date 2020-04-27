@@ -21,6 +21,17 @@ npm run serve
 打包 npm run dll
 打包结束后 npm run serve 体验快速的热更新吧~
 ```
+
+### 更新说明
+#### 0.2.0
+```
+BATE版本
+增加dll优化 减少打包速度
+增加打包自动去除debug及console
+增加全局组件自动挂接功能 使用方式参考 Vue-cli3.0\src\components\common\README.md
+修改axios封装 令人头疼的双数据参数 直接传入一个即可
+```
+
 ## Project setup
 
 ```

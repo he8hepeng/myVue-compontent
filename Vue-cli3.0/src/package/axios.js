@@ -32,37 +32,38 @@ function filterNull (o) {
  *
  * @param {any} method 方法
  * @param {any} url 地址
- * @param {any} data 实体类body
- * @param {any} params url数据
+ * @param {any} params 数据
  * @param {any} success 正确回调
  * @param {any} failure 错误回调
  */
-function apiAxios (method, url, data, params, success, failure) {
+function apiAxios (method, url, params, success, failure) {
   if (params && typeof params !== 'string') {
     params = filterNull(params)
   }
   axios({
     method: method === 'postG' ? 'POST' : method,
     url: url,
-    data: data || null,
-    params: params || null,
+    data: method === 'GET' ? params : null,
+    params: method !== 'GET' ? params : null,
     withCredentials: false,
     headers: {
       'X-HTTP-Method-Override': method === 'postG' ? 'get' : '',
       'Content-Type': 'application/json'
     }
-  }).then(function (res) {
-    if (res.status === 204) {
-      res.data = {
-        message: '成功'
-      }
-    }
-    success(res.data.data)
-  }).catch(function (err) {
-    if (failure) {
-      failure(err)
-    }
   })
+    .then(function(res) {
+      if (res.status === 204) {
+        res.data = {
+          message: '成功'
+        };
+      }
+      success(res.data.data);
+    })
+    .catch(function(err) {
+      if (failure) {
+        failure(err);
+      }
+    });
 }
 
 /**
@@ -100,27 +101,27 @@ function apiAxiosDownload (method, url, data, params, success, failure) {
 export default {
   // get请求
   get: function (url, data, params, success, failure) {
-    return apiAxios('GET', url, data, params, success, failure)
+    return apiAxios('GET', url, params, success, failure)
   },
   // post请求
   post: function (url, data, params, success, failure) {
-    return apiAxios('POST', url, data, params, success, failure)
+    return apiAxios('POST', url, params, success, failure)
   },
   // patch请求
   patch: function (url, data, params, success, failure) {
-    return apiAxios('PATCH', url, data, params, success, failure)
+    return apiAxios('PATCH', url, params, success, failure)
   },
   // put请求
   put: function (url, data, params, success, failure) {
-    return apiAxios('PUT', url, data, params, success, failure)
+    return apiAxios('PUT', url, params, success, failure)
   },
   // delete
   delete: function (url, data, params, success, failure) {
-    return apiAxios('DELETE', url, data, params, success, failure)
+    return apiAxios('DELETE', url, params, success, failure)
   },
   // 增加 postG请求 按后台要求 get请求在某些情况 需要传实体body so 添加postG请求
   postG: function (url, data, params, postdata, success, failure) {
-    return apiAxios('postG', url, data, params, success, failure)
+    return apiAxios('postG', url, params, success, failure)
   },
   // 下载的请求接口
   postDownload: function (url, data, params, success, failure) {
@@ -171,11 +172,11 @@ axios.interceptors.response.use(
     closeLoding()
     if (error.response !== undefined) {
       if (
-        error.config.responseType === "blob" &&
-        error.response.data.type === "application/json"
+        error.config.responseType === 'blob' &&
+        error.response.data.type === 'application/json'
       ) {
         let reader = new FileReader();
-        reader.readAsText(error.response.data, "utf-8")
+        reader.readAsText(error.response.data, 'utf-8')
         reader.onload = e => {
           Message.error(JSON.parse(reader.result))
         };
