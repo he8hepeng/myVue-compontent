@@ -31,7 +31,6 @@ BATE版本
 增加全局组件自动挂接功能 使用方式参考 Vue-cli3.0\src\components\common\README.md
 修改axios封装 令人头疼的双数据参数 直接传入一个即可
 ```
-
 ## Project setup
 
 ```

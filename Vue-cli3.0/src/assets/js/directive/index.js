@@ -1,3 +1,9 @@
+/*
+ * @Author: HePeng
+ * @Date: 2020-04-27 09:40:13
+ * @Last Modified by:   HePeng
+ * @Last Modified time: 2020-04-27 09:40:13
+ */
 import Vue from 'vue'
 
 // el-table 触底自动触发

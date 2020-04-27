@@ -1,3 +1,9 @@
+/*
+ * @Author: HePeng
+ * @Date: 2020-04-27 09:39:53
+ * @Last Modified by:   HePeng
+ * @Last Modified time: 2020-04-27 09:39:53
+ */
 import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App.vue'

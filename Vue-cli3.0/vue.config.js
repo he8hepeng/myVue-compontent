@@ -1,3 +1,9 @@
+/*
+ * @Author: HePeng
+ * @Date: 2020-04-27 09:39:43
+ * @Last Modified by:   HePeng
+ * @Last Modified time: 2020-04-27 09:39:43
+ */
 const webpack = require('webpack')
 const path = require('path')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
