@@ -1,8 +1,8 @@
 /*
  * @Author: HePeng
  * @Date: 2020-04-27 09:39:34
- * @Last Modified by:   HePeng
- * @Last Modified time: 2020-04-27 09:39:34
+ * @Last Modified by: HePeng
+ * @Last Modified time: 2020-04-27 10:05:32
  */
 const path = require("path")
 const webpack = require("webpack")
@@ -23,7 +23,6 @@ module.exports = {
       "moment",
       "lodash",
       "file-saver",
-      "core-js",
       "vue-cookies"
     ]
   },

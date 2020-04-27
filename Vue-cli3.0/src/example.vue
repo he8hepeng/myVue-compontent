@@ -104,7 +104,7 @@ export default {
 .about {
   .size(100%;100%);
   .b_r(4px);
-  .box_shadow(rgba(0, 0, 0, 0.3));
+  // .box_shadow(rgba(0, 0, 0, 0.3));
   padding: 10px;
 }
 

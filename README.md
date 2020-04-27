@@ -30,6 +30,8 @@ BATE版本
 增加打包自动去除debug及console
 增加全局组件自动挂接功能 使用方式参考 Vue-cli3.0\src\components\common\README.md
 修改axios封装 令人头疼的双数据参数 直接传入一个即可
+丰富了less封装的代码块
+增加ie版本的兼容性 解决IE下白屏现象
 ```
 ## Project setup
 
