@@ -52,19 +52,19 @@ function apiAxios (method, url, params, success, failure) {
       'Content-Type': 'application/json'
     }
   })
-    .then(function(res) {
+    .then(function (res) {
       if (res.status === 204) {
         res.data = {
           message: '成功'
-        };
+        }
       }
-      success(res.data.data);
+      success(res.data.data)
     })
-    .catch(function(err) {
+    .catch(function (err) {
       if (failure) {
-        failure(err);
+        failure(err)
       }
-    });
+    })
 }
 
 /**
@@ -160,7 +160,7 @@ axios.interceptors.response.use(
     if (response.status === 204) {
       response.data = {
         content: []
-      };
+      }
     }
     return response
   },
@@ -171,22 +171,21 @@ axios.interceptors.response.use(
         error.config.responseType === 'blob' &&
         error.response.data.type === 'application/json'
       ) {
-        let reader = new FileReader();
+        let reader = new FileReader()
         reader.readAsText(error.response.data, 'utf-8')
         reader.onload = e => {
           Message.error(JSON.parse(reader.result))
-        };
+        }
       } else {
         Message.error(error.response.data.message)
       }
     }
     return Promise.reject(error)
   }
-);
+)
 
-
-function closeLoding() {
-  modelIndex--;
+function closeLoding () {
+  modelIndex--
   if (modelIndex === 0) {
     if (loadingInstance) {
       if (repeatToken) {
@@ -197,7 +196,6 @@ function closeLoding() {
     }
   }
 }
-
 
 // 校验token 请维护自己项目的 路径地址
 function validateToken () {

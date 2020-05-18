@@ -7,8 +7,8 @@
 const webpack = require('webpack')
 const path = require('path')
 const IS_PROD = ['production', 'test'].includes(process.env.NODE_ENV)
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 module.exports = {
   publicPath: './',
   // 输出文件目录
@@ -33,14 +33,14 @@ module.exports = {
     host: 'localhost',
     port: '8080'
   },
-  transpileDependencies:['normalize-url', 'mini-css-extract-plugin', 'prepend-http', 'sort-keys'],
+  transpileDependencies: ['normalize-url', 'mini-css-extract-plugin', 'prepend-http', 'sort-keys'],
   chainWebpack: config => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
     types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
     config.resolve.alias // 自定义目录别名 感谢 娄赫曦
-      .set("@", resolvePath("src"))
-      .set("@assets", resolvePath("src/assets"))
-      .set("@common", resolvePath("src/components/common")); // 公共模块
+      .set('@', resolvePath('src'))
+      .set('@assets', resolvePath('src/assets'))
+      .set('@common', resolvePath('src/components/common')) // 公共模块
     config.resolve.symlinks(true)
   },
   css: {
@@ -55,24 +55,24 @@ module.exports = {
     config.plugins.push(
       new webpack.ProvidePlugin({
         Snap:
-          "imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js",
-        "window.snapsvg":
-          "imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js"
+          'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
+        'window.snapsvg':
+          'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
       }),
       new webpack.DllReferencePlugin({
         context: process.cwd(),
-        manifest: require("./public/vendor/vendor-manifest.json")
+        manifest: require('./public/vendor/vendor-manifest.json')
       }),
       // 将 dll 注入到 生成的 html 模板中
       new AddAssetHtmlPlugin({
         // dll文件位置
-        filepath: path.resolve(__dirname, "./public/vendor/*.js"),
+        filepath: path.resolve(__dirname, './public/vendor/*.js'),
         // dll 引用路径
-        publicPath: "./vendor",
+        publicPath: './vendor',
         // dll最终输出的目录
-        outputPath: "./vendor"
+        outputPath: './vendor'
       })
-    );
+    )
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(new UglifyJsPlugin({
         uglifyOptions: {
