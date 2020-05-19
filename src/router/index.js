@@ -7,10 +7,6 @@ Router.prototype.push = function push (location) {
 }
 
 Vue.use(Router)
-Router.beforeEach((to, from, next) => {
-  console.log(to, from, next)
-  next()
-})
 export default new Router({
   mode: 'hash',
   base: process.env.BASE_URL,

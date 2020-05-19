@@ -2,13 +2,15 @@
  * @Author: HePeng
  * @Date: 2020-04-27 09:39:43
  * @Last Modified by: HePeng
- * @Last Modified time: 2020-04-27 09:45:23
+ * @Last Modified time: 2020-05-19 10:26:27
  */
 const webpack = require('webpack')
 const path = require('path')
-const IS_PROD = ['production', 'test'].includes(process.env.NODE_ENV)
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const IS_PRODUCTION = process.env.NODE_ENV == 'production' // 正式环境
+const CompressionPlugin = require('compression-webpack-plugin') // 压缩css js html
+const IS_PROD = ['production', 'test'].includes(process.env.NODE_ENV) // 修复热更新
+const TerserPlugin = require("terser-webpack-plugin"); // 去除console debug
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin') // dll优化
 module.exports = {
   publicPath: './',
   // 输出文件目录
@@ -42,6 +44,37 @@ module.exports = {
       .set('@assets', resolvePath('src/assets'))
       .set('@common', resolvePath('src/components/common')) // 公共模块
     config.resolve.symlinks(true)
+    // 解决ie11兼容ES6
+    config.entry('main').add('babel-polyfill')
+    if (IS_PRODUCTION) {
+      /** gzip 压缩 */
+      config
+        .plugin('compressionPlugin')
+        .use(CompressionPlugin)
+        .tap(() => [
+          {
+            test: /\.js$|\.html$|\.css/, //匹配文件名
+            threshold: 10240, //超过10k进行压缩
+            deleteOriginalAssets: false //是否删除源文件
+          }
+        ]);
+      /** 去掉console.log debugger sourceMap*/
+      config.optimization.minimizer([
+        new TerserPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true,
+          terserOptions: {
+            compress: {
+            // 关键代码
+              warnings: true,
+              drop_debugger: true,
+              drop_console: true
+            }
+          }
+        })
+      ])
+    }
   },
   css: {
     loaderOptions: {
@@ -56,7 +89,7 @@ module.exports = {
       new webpack.ProvidePlugin({
         Snap:
           'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
-        'window.snapsvg':
+          'window.snapsvg':
           'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
       }),
       new webpack.DllReferencePlugin({
@@ -73,19 +106,6 @@ module.exports = {
         outputPath: './vendor'
       })
     )
-    if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            drop_debugger: true,
-            drop_console: true // 生产环境自动删除console
-          },
-          warnings: false
-        },
-        sourceMap: false,
-        parallel: true // 使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
-      }))
-    }
   }
 }
 
