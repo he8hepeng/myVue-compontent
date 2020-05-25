@@ -2,7 +2,7 @@
  * @Author: HePeng
  * @Date: 2020-04-27 09:39:43
  * @Last Modified by: HePeng
- * @Last Modified time: 2020-05-22 13:58:19
+ * @Last Modified time: 2020-05-25 10:36:58
  */
 const webpack = require('webpack')
 const path = require('path')
@@ -107,8 +107,10 @@ module.exports = {
         // dll最终输出的目录
         outputPath: './vendor'
       })
-      if (process.env.NODE_ENV === 'production') {
-        config.plugins.push(new UglifyJsPlugin({
+    )
+    if (process.env.NODE_ENV === "production") {
+      config.plugins.push(
+        new UglifyJsPlugin({
           uglifyOptions: {
             compress: {
               drop_debugger: true,
@@ -118,9 +120,9 @@ module.exports = {
           },
           sourceMap: false,
           parallel: true // 使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
-        }))
-      }
-    )
+        })
+      );
+    }
   }
 }
 
