@@ -2,7 +2,7 @@
  * @Author: HePeng
  * @Date: 2020-04-27 09:39:43
  * @Last Modified by: HePeng
- * @Last Modified time: 2020-05-25 10:36:58
+ * @Last Modified time: 2020-05-25 14:12:35
  */
 const webpack = require('webpack')
 const path = require('path')
@@ -46,8 +46,8 @@ module.exports = {
       .set('@assets', resolvePath('src/assets'))
       .set('@common', resolvePath('src/components/common')) // 公共模块
     config.resolve.symlinks(true)
-    // 解决ie11兼容ES6
-    config.entry('main').add('babel-polyfill')
+    // // 解决ie11兼容ES6
+    // config.entry('main').add('babel-polyfill')
     if (IS_PRODUCTION) {
       /** gzip 压缩 */
       config

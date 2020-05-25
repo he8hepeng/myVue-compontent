@@ -2,9 +2,9 @@
  * @Author: HePeng
  * @Date: 2020-04-27 09:39:53
  * @Last Modified by: HePeng
- * @Last Modified time: 2020-05-19 10:13:13
+ * @Last Modified time: 2020-05-25 14:11:33
  */
-// import 'babel-polyfill'
+import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
