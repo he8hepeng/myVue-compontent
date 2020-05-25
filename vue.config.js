@@ -2,14 +2,16 @@
  * @Author: HePeng
  * @Date: 2020-04-27 09:39:43
  * @Last Modified by: HePeng
- * @Last Modified time: 2020-05-19 10:26:27
+ * @Last Modified time: 2020-05-22 13:58:19
  */
 const webpack = require('webpack')
 const path = require('path')
 const IS_PRODUCTION = process.env.NODE_ENV == 'production' // 正式环境
 const CompressionPlugin = require('compression-webpack-plugin') // 压缩css js html
 const IS_PROD = ['production', 'test'].includes(process.env.NODE_ENV) // 修复热更新
-const TerserPlugin = require("terser-webpack-plugin"); // 去除console debug
+// const TerserPlugin = require("terser-webpack-plugin"); // 去除console debug
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // 去除console debug
+// 选其一
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin') // dll优化
 module.exports = {
   publicPath: './',
@@ -59,21 +61,21 @@ module.exports = {
           }
         ]);
       /** 去掉console.log debugger sourceMap*/
-      config.optimization.minimizer([
-        new TerserPlugin({
-          cache: true,
-          parallel: true,
-          sourceMap: true,
-          terserOptions: {
-            compress: {
-            // 关键代码
-              warnings: true,
-              drop_debugger: true,
-              drop_console: true
-            }
-          }
-        })
-      ])
+      // config.optimization.minimizer([
+      //   new TerserPlugin({
+      //     cache: true,
+      //     parallel: true,
+      //     sourceMap: true,
+      //     terserOptions: {
+      //       compress: {
+      //       // 关键代码
+      //         warnings: true,
+      //         drop_debugger: true,
+      //         drop_console: true
+      //       }
+      //     }
+      //   })
+      // ])
     }
   },
   css: {
@@ -105,6 +107,19 @@ module.exports = {
         // dll最终输出的目录
         outputPath: './vendor'
       })
+      if (process.env.NODE_ENV === 'production') {
+        config.plugins.push(new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              drop_debugger: true,
+              drop_console: true // 生产环境自动删除console
+            },
+            warnings: false
+          },
+          sourceMap: false,
+          parallel: true // 使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
+        }))
+      }
     )
   }
 }
