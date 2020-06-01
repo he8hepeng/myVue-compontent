@@ -37,34 +37,34 @@ function filterNull (o) {
  * @param {any} success 正确回调
  * @param {any} failure 错误回调
  */
-function apiAxios (method, url, params, success, failure) {
-  if (params && typeof params !== 'string') {
-    params = filterNull(params)
+function apiAxios(method, url, data, params, success, failure) {
+  if (params && typeof params !== "string") {
+    params = filterNull(params);
   }
   axios({
-    method: method === 'postG' ? 'POST' : method,
+    method: method === "postG" ? "POST" : method,
     url: url,
-    data: method === 'GET' ? params : null,
-    params: method !== 'GET' ? params : null,
+    data: data || null,
+    params: params || null,
     withCredentials: false,
     headers: {
-      'X-HTTP-Method-Override': method === 'postG' ? 'get' : '',
-      'Content-Type': 'application/json'
+      "X-HTTP-Method-Override": method === "postG" ? "get" : "",
+      "Content-Type": "application/json"
     }
   })
-    .then(function (res) {
-      if (res.status === 204) {
-        res.data = {
-          message: '成功'
-        }
-      }
-      success(res.data.data)
+    .then(function(res) {
+      // if (res.status === 204) {
+      //   res.data = {
+      //     message: "成功"
+      //   };
+      // }
+      success(res.data);
     })
-    .catch(function (err) {
+    .catch(function(err) {
       if (failure) {
-        failure(err)
+        failure(err);
       }
-    })
+    });
 }
 
 /**
@@ -101,27 +101,27 @@ function apiAxiosDownload (method, url, data, params, success, failure) {
 // 返回在vue模板中的调用接口
 export default {
   // get请求
-  get: function (url, params, success, failure) {
+  get: function (url, data, params, success, failure) {
     return apiAxios('GET', url, params, success, failure)
   },
   // post请求
-  post: function (url, params, success, failure) {
+  post: function (url, data, params, success, failure) {
     return apiAxios('POST', url, params, success, failure)
   },
   // patch请求
-  patch: function (url, params, success, failure) {
+  patch: function (url, data, params, success, failure) {
     return apiAxios('PATCH', url, params, success, failure)
   },
   // put请求
-  put: function (url, params, success, failure) {
+  put: function (url, data, params, success, failure) {
     return apiAxios('PUT', url, params, success, failure)
   },
   // delete
-  delete: function (url, params, success, failure) {
+  delete: function (url, data, params, success, failure) {
     return apiAxios('DELETE', url, params, success, failure)
   },
   // 增加 postG请求 按后台要求 get请求在某些情况 需要传实体body so 添加postG请求
-  postG: function (url, params, postdata, success, failure) {
+  postG: function (url, data, params, postdata, success, failure) {
     return apiAxios('postG', url, params, success, failure)
   },
   // 下载的请求接口

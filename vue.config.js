@@ -2,7 +2,7 @@
  * @Author: HePeng
  * @Date: 2020-04-27 09:39:43
  * @Last Modified by: HePeng
- * @Last Modified time: 2020-05-25 14:12:35
+ * @Last Modified time: 2020-06-01 09:24:15
  */
 const webpack = require('webpack')
 const path = require('path')
@@ -37,11 +37,12 @@ module.exports = {
     host: 'localhost',
     port: '8080'
   },
+  // 修复ie10 app.js报错问题
   transpileDependencies: ['normalize-url', 'mini-css-extract-plugin', 'prepend-http', 'sort-keys'],
   chainWebpack: config => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
     types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
-    config.resolve.alias // 自定义目录别名 感谢 娄赫曦
+    config.resolve.alias // 自定义目录别名
       .set('@', resolvePath('src'))
       .set('@assets', resolvePath('src/assets'))
       .set('@common', resolvePath('src/components/common')) // 公共模块
@@ -88,12 +89,13 @@ module.exports = {
   },
   configureWebpack: (config) => {
     config.plugins.push(
-      new webpack.ProvidePlugin({
-        Snap:
-          'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
-          'window.snapsvg':
-          'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
-      }),
+      // 引用snap 或 jq 看是否需要
+      // new webpack.ProvidePlugin({
+      //   Snap:
+      //     'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js',
+      //     'window.snapsvg':
+      //     'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
+      // }),
       new webpack.DllReferencePlugin({
         context: process.cwd(),
         manifest: require('./public/vendor/vendor-manifest.json')
