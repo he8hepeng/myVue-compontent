@@ -18,7 +18,7 @@
     "file-saver": "^2.0.2",
     "less": "^3.10.3",
     "mockjs": "^1.0.1-beta3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "vue": "^2.5.2",
     "vue-cookies": "^1.5.13",
     "vue-router": "^3.0.1",
